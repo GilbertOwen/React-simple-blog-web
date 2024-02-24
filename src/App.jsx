@@ -4,6 +4,7 @@ import Navbar from './component/Navbar.jsx'
 import Home from './page/Home.jsx'
 import Create from './page/Create.jsx'
 import { BrowserRouter as Router, Route, Routes  } from 'react-router-dom'
+import BlogDetail from './page/BlogDetail.jsx'
 function App() {
   return (
     <Router>
@@ -11,6 +12,8 @@ function App() {
       <Navbar></Navbar>
       <Routes>
         <Route exact path='/' Component={Home}>
+        </Route>
+        <Route exact path='/blog/:id' Component={BlogDetail}>
         </Route>
         <Route exact path='/create' Component={Create}>
         </Route>

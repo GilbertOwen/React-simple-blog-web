@@ -10,7 +10,6 @@ const useFetch = (url) => {
     const getData = async (link) => {
         try{
             const res = await axios.get(link);
-            console.log(res);
             if(!res.statusText === 'OK'){
                 throw Error('Could not get the data from the source');
             }   
@@ -24,12 +23,7 @@ const useFetch = (url) => {
         }
     }
     useEffect(()=>{
-        setTimeout(() => {
-            getData(url);
-        }, 2000);
-        // return () => {
-        //     console.log('Cleanup');
-        // }
+        getData(url);
     }, [url]);
 
     return { data, isPending, error };

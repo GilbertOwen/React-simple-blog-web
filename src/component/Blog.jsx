@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Blog = ({blogs}) => {
     return ( 
         <div className="w-3/4 border-r-2 min-h-screen h-full">
@@ -5,9 +7,9 @@ const Blog = ({blogs}) => {
                 { blogs && blogs.posts.map((post)=>{    
                     return (
                         <div className="flex flex-col mb-3 pb-2 border-b-2 mr-2" key={post.id}>
-                            <a href="/" className="text-2xl w-fit font-semibold text-blue-600">
+                            <Link to={`/blog/${post.id}`} className="text-2xl w-fit font-semibold text-blue-600">
                                 { post.title }
-                            </a>
+                            </Link>
                             <h5 className="text-base mb-2">
                                 <a href="/" className="w-fit font-semibold text-blue-600">
                                 { post.user.name} 
