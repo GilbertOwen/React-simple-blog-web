@@ -8,7 +8,7 @@ const Navbar = () => {
             <h2 className='text-3xl font-bold bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 text-transparent'>Funicurs</h2>
           </div>
           <div className="flex flex-row items-center gap-x-5">
-            <Link to="/" className='text-lg font-medium mx-1 py-2 px-4 hover:bg-rose-300 rounded-lg hover:shadow-md hover:text-white duration-300'>
+            <Link to="/blogs" className='text-lg font-medium mx-1 py-2 px-4 hover:bg-rose-300 rounded-lg hover:shadow-md hover:text-white duration-300'>
               Blog
             </Link>
             <Link to="/create" className='text-lg font-medium mx-1 py-2 px-4 text-white bg-rose-300 shadow-md hover:text-black duration-300 hover:bg-white hover:shadow-none rounded-lg'>
