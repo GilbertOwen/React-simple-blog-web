@@ -5,6 +5,7 @@ import Home from './page/Home.jsx'
 import Create from './page/Create.jsx'
 import { BrowserRouter as Router, Route, Routes  } from 'react-router-dom'
 import BlogDetail from './page/BlogDetail.jsx'
+import NotFound from './page/NotFound.jsx'
 function App() {
   return (
     <Router>
@@ -19,6 +20,7 @@ function App() {
         </Route>
         <Route exact path='/create' Component={Create}>
         </Route>
+        <Route path='*' Component={NotFound} />
       </Routes>
     </div>
     </Router>
