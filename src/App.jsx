@@ -11,6 +11,8 @@ function App() {
     <div className='min-h-screen w-full h-full pt-24 px-3'>
       <Navbar />
       <Routes>
+        <Route exact path='/' Component={Home}>
+        </Route>
         <Route exact path='/blogs' Component={Home}>
         </Route>
         <Route exact path='/blog/:id' Component={BlogDetail}>
