@@ -1,4 +1,4 @@
-#React + laravel Rest Api
+# React + laravel Rest Api
 
 This project uses react from vite template for the front end and using laravel rest api to do the CRUD operation
 
