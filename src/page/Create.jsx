@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Create = () => {
     const navigate = useNavigate();
     const [title, setTitle] = useState('');
-    const [author, setAuthor] = useState('');
+    // const [author, setAuthor] = useState('');
     const [body, setBody] = useState('');
     const [slug, setSlug] = useState('');
     const [category, setCategory] = useState('');
@@ -19,7 +19,6 @@ const Create = () => {
         // console.log(post);
         try{
             const post = {
-                "user_id" : parseInt(author),
                 "category_id" : parseInt(category),
                 title,
                 slug,
@@ -42,23 +41,31 @@ const Create = () => {
     }
     // Pertama ambil parameter title dan jadikan functionnya asynchronous
     const doSlug = async (title) => {
-        // Ubah title menjadi lowercase
-        title = title.toLowerCase();
-        // ganti spasi menjadi dash atau strip
-        let words = title.replace(/\s+/g, '-');
-        console.log(words);
-        // melakukan pengecekan ke dalam api Post untuk melihat apakah ada slug yang sama dengan yang di input
-        const res = await axios.post("http://127.0.0.1:8000/api/posts/checkSlug", {
-            words
-        });
-        // isi dari valid ini adalah untuk memberitahu kita apakah slug yang kita kirimkan ini valid untuk masuk ke dalam table post 
-        const slug = await res.data.valid;
-        // Jika akan dan tidak ada duplikasi, maka 
-        if(slug === true){
-            // Ubah isi dari input slug atau variable state slug menjadi words yang sudah kita ubah
-            setSlug(words);
+        try{
+            // Ubah title menjadi lowercase
+            title = title.toLowerCase();
+            // ganti spasi menjadi dash atau strip
+            let words = title.replace(/\s+/g, '-');
+            console.log(words);
+            // melakukan pengecekan ke dalam api Post untuk melihat apakah ada slug yang sama dengan yang di input
+            const res = await axios.post("http://127.0.0.1:8000/api/posts/checkSlug", {
+                words
+            });
+            console.log(res);
+            // isi dari valid ini adalah untuk memberitahu kita apakah slug yang kita kirimkan ini valid untuk masuk ke dalam table post 
+            const slugValid = await res.data.valid;
+            // Jika akan dan tidak ada duplikasi, maka 
+            if(slugValid == true){
+                // Ubah isi dari input slug atau variable state slug menjadi words yang sudah kita ubah
+                setSlug(words);
+            }else{
+                setSlug(res.data.slug);
+            }
+            console.log(res.data.slug);
+        }catch(err){
+            console.log(err);
+            
         }
-        console.log(slug);
     }
     useEffect(()=>{
         console.log(category);
@@ -98,19 +105,19 @@ const Create = () => {
                     }
                 </div>
                 <div className="flex flex-col mb-2">
-                    <label htmlFor="title" className="mb-1 text-sm">Slug</label>
-                    <input required type="text" readOnly className="p-2 border-t-2 border-l-2 border-r-2 border-b-2 focus:border-t-0 outline-none focus:border-r-0 focus:border-l-0 focus:border-b-2 duration-100 rounded-md focus:shadow-sm focus:shadow-blue-100" id="title" value={slug}/>
+                    <label htmlFor="slug" className="mb-1 text-sm">Slug</label>
+                    <input required type="text" readOnly className="p-2 border-t-2 border-l-2 border-r-2 border-b-2 focus:border-t-0 outline-none focus:border-r-0 focus:border-l-0 focus:border-b-2 duration-100 rounded-md focus:shadow-sm focus:shadow-blue-100" id="slug" value={slug}/>
                     {errorField['slug'] && 
                         <p className="text-sm text-red-600">{errorField['slug']}</p>
                     }
                 </div>
-                <div className="flex flex-col mb-2">
+                {/* <div className="flex flex-col mb-2">
                     <label htmlFor="title" className="mb-1 text-sm">Author</label>
                     <input required type="number" className="p-2 border-t-2 border-l-2 border-r-2 border-b-2 focus:border-t-0 outline-none focus:border-r-0 focus:border-l-0 focus:border-b-2 duration-100 rounded-md focus:shadow-sm focus:shadow-blue-100" id="title" value={author} onChange={(e) => {setAuthor(e.target.value)}}/>
                     {errorField['user_id'] && 
                         <p className="text-sm text-red-600">{errorField['user_id']}</p>
                     }
-                </div>
+                </div> */}
                 <div className="flex flex-col mb-2">
                     <label htmlFor="title" className="mb-1 text-sm">Category :</label>
                     <select required type="number" className="p-2 border-t-2 border-l-2 border-r-2 border-b-2 focus:border-t-0 outline-none focus:border-r-0 focus:border-l-0 focus:border-b-2 duration-100 rounded-md focus:shadow-sm focus:shadow-blue-100" id="title" value={category} onChange={(e) => setCategory(e.target.value)}>
